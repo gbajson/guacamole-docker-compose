@@ -95,7 +95,13 @@ services:
   # guacd
   guacd:
     container_name: guacd_compose
-    image: guacamole/guacd
+    
+    # Workaround for:
+    # https://github.com/boschkundendienst/guacamole-docker-compose/issues/57#issuecomment-1445220715
+    image: guacamole/guacd:1.4.0
+    environment:
+      # trace, debug, info, warning, and error
+      GUACD_LOG_LEVEL: info    
     networks:
       guacnetwork_compose:
     restart: always
